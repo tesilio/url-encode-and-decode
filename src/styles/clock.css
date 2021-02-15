@@ -1,0 +1,47 @@
+@font-face{
+    font-family:'digital-clock-font';
+    src: url('./digital-7.ttf') format('truetype');
+}
+
+html {
+    background: #000000;
+}
+
+#Clock {
+    font-family: 'digital-clock-font';
+    text-align: center;
+    color: gold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+#dateWrapper {
+    margin-right: 10px;
+}
+#date {
+    font-size: 10vmax;
+}
+
+#ampm {
+    font-size: 10vmax;
+}
+
+#time {
+    font-size: 35vmax;
+}
+
+#remaining {
+    font-size: 5vmax;
+}
+
+#colon.hide{
+    color: #000000;
+}
+
+@media (max-width: 768px) {
+  #Clock {
+      flex-direction: column;
+  }
+}
