@@ -51,12 +51,6 @@ export default class Clock extends React.Component {
     return `${date.getMonth() + 1}월${date.getDate()}일(${day})`;
   }
 
-  getAmpm = () => {
-    const date = this.state.d;
-    let hours = date.getHours();
-    return hours >= 12 ? '오후' : '오전';
-  }
-
   getRemainingTime = () => {
     const today10Pm = new Date();
     today10Pm.setHours(22, 0, 0, 0);
@@ -76,9 +70,6 @@ export default class Clock extends React.Component {
         <div id='dateWrapper'>
           <div id='date'>
             {this.getDate()}
-          </div>
-          <div id='ampm'>
-            {this.getAmpm()}
           </div>
         </div>
         <div id='timeWrapper'>

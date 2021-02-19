@@ -12,7 +12,7 @@ html {
     text-align: center;
     color: gold;
     display: flex;
-    align-items: center;
+    /*align-items: center;*/
     justify-content: center;
     margin-bottom: 50px;
 }
