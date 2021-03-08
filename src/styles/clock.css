@@ -21,23 +21,19 @@ html {
     margin-right: 10px;
 }
 #date {
-    font-size: 10vmax;
-}
-
-#ampm {
-    font-size: 10vmax;
+    font-size: 7vmax;
 }
 
 #time {
-    font-size: 35vmax;
+    font-size: 32vmax;
 }
 
 #remaining {
-    font-size: 5vmax;
+    font-size: 6vmax;
 }
 
-#colon.hide{
-    color: #000000;
+#colon.hide {
+    opacity: 0;
 }
 
 @media (max-width: 768px) {

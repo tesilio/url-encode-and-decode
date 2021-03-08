@@ -1,19 +1,35 @@
 import React from 'react';
 import '../styles/clock.css';
 
+/**
+ * 10 미만 앞자리 0추가
+ * @param number
+ * @returns {string|*}
+ */
+function addZeroNumber(number) {
+  if (number <= 0) {
+    return '00';
+  }
+  return Math.abs(number) < 10 ? `0${number}` : number;
+}
+
 function getTimeRemaining(endTime) {
   const total = Date.parse(endTime) - Date.parse(new Date());
-  const seconds = Math.floor((total / 1000) % 60);
-  const minutes = Math.floor((total / 1000 / 60) % 60);
-  const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
-  const days = Math.floor(total / (1000 * 60 * 60 * 24));
+  const secondsNumber = Math.floor((total / 1000) % 60);
+  const minutesNumber = Math.floor((total / 1000 / 60) % 60);
+  const hoursNumber = Math.floor((total / (1000 * 60 * 60)) % 24);
+  const daysNumber = Math.floor(total / (1000 * 60 * 60 * 24));
+  const seconds = addZeroNumber(secondsNumber);
+  const minutes = addZeroNumber(minutesNumber);
+  const hours = addZeroNumber(hoursNumber);
+  const days = addZeroNumber(daysNumber);
 
   return {
     total,
     days,
     hours,
     minutes,
-    seconds
+    seconds,
   };
 }
 
@@ -34,7 +50,7 @@ export default class Clock extends React.Component {
   }
 
   componentWillUnmount() { //종료되면 반복하는것도 클리어시키기
-    clearInterval(this.timeID)
+    clearInterval(this.timeID);
   }
 
   blink = () => {  //시계 구현
@@ -64,7 +80,8 @@ export default class Clock extends React.Component {
     let minutes = date.getMinutes();
     hours = hours % 12;
     hours = hours ? hours : 12; // the hour '0' should be '12'
-    minutes = minutes < 10 ? '0' + minutes : minutes;
+    hours = addZeroNumber(hours);
+    minutes = addZeroNumber(minutes);
     return (
       <div id='Clock'>
         <div id='dateWrapper'>
