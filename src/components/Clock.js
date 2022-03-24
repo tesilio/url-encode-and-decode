@@ -34,24 +34,36 @@ function getTimeRemaining(endTime) {
 }
 
 export default class Clock extends React.Component {
-  state = {
-    colon: '',
-  }
   constructor(props) {
     super(props)
-    this.state = { d: new Date() }
+    this.state = {
+      d: new Date(),
+      colon: '',
+      isGold: false,
+    }
   }
 
-  componentDidMount() { // Clock 컴포넌트가 불러올때마다 1초씩 this.Change()를 부른다
+  componentDidMount() { // info: Clock 컴포넌트가 불러와질 때마다 1초씩 this.Change()를 호출
     this.timeID = setInterval(
       () => this.blink(),
       1000
     )
   }
 
-  componentWillUnmount() { //종료되면 반복하는것도 클리어시키기
+  componentWillUnmount() { // info: 종료 시 반복 클리어
     clearInterval(this.timeID);
   }
+
+  randomColor = () => Math.floor(Math.random() * 16777215).toString(16);
+
+  clockOnClickHandle = (event) => {
+    console.dir(event.target);
+    const colors = [`#${this.randomColor()}`, 'gold'];
+    event.target.style.color = colors[Number(this.state.isGold)];
+    this.setState({
+      isGold: !this.state.isGold,
+    });
+  };
 
   blink = () => {  //시계 구현
     this.setState({
@@ -68,9 +80,9 @@ export default class Clock extends React.Component {
   }
 
   getRemainingTime = () => {
-    const today10Pm = new Date();
-    today10Pm.setHours(22, 0, 0, 0);
-    return getTimeRemaining(today10Pm);
+    const today9Pm = new Date();
+    today9Pm.setHours(21, 0, 0, 0);
+    return getTimeRemaining(today9Pm);
   }
 
   render() {
@@ -80,20 +92,20 @@ export default class Clock extends React.Component {
     let minutes = date.getMinutes();
     hours = hours % 12;
     hours = hours ? hours : 12; // the hour '0' should be '12'
-    hours = addZeroNumber(hours);
     minutes = addZeroNumber(minutes);
     return (
       <div id='Clock'>
         <div id='dateWrapper'>
-          <div id='date'>
+          <div id='date' onClick={this.clockOnClickHandle}>
             {this.getDate()}
           </div>
         </div>
         <div id='timeWrapper'>
-          <div id='time'>
+          <div id='time' onClick={this.clockOnClickHandle}>
             {hours}<span id='colon' className={this.state.colon}>:</span>{minutes}
           </div>
-          <div id='remaining'>{remainingTime.hours}:{remainingTime.minutes}:{remainingTime.seconds}</div>
+          <div id='remaining'
+               onClick={this.clockOnClickHandle}>{remainingTime.hours}:{remainingTime.minutes}:{remainingTime.seconds}</div>
         </div>
       </div>
     )

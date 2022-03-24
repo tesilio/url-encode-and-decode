@@ -15,17 +15,18 @@ html {
     /*align-items: center;*/
     justify-content: center;
     margin-bottom: 50px;
+    cursor: pointer;
 }
 
 #dateWrapper {
     margin-right: 10px;
 }
 #date {
-    font-size: 7vmax;
+    font-size: 8vmax;
 }
 
 #time {
-    font-size: 32vmax;
+    font-size: 33vmax;
 }
 
 #remaining {
